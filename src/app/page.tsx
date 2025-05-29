@@ -480,6 +480,23 @@ const serviceRecommendations: Record<string, Recommendation> = {
     description: "Serverless compute for containers without managing servers or clusters",
     useCases: ["Containerized microservices", "Batch jobs", "Web applications", "APIs"],
     pricing: "Pay for vCPU and memory resources used",
+    pricingExamples: [
+      {
+        scenario: "Small containerized app (0.25 vCPU, 0.5GB)",
+        monthlyEstimate: "$11.76",
+        details: "$0.04048/vCPU-hour + $0.004445/GB-hour × 730 hours"
+      },
+      {
+        scenario: "Medium microservice (1 vCPU, 2GB)",
+        monthlyEstimate: "$36.00",
+        details: "Fully managed container runtime with auto-scaling"
+      },
+      {
+        scenario: "High-availability service (2 vCPU, 4GB)",
+        monthlyEstimate: "$88.00",
+        details: "Multi-AZ deployment with load balancing"
+      }
+    ],
     pros: ["No server management", "Container support", "Automatic scaling", "Security isolation"],
     cons: ["Higher cost than EC2", "Less control", "Limited instance types"],
     bestFor: ["Serverless containers", "Microservices", "Batch processing", "Modern apps"],
@@ -487,6 +504,9 @@ const serviceRecommendations: Record<string, Recommendation> = {
     cost: "Medium",
     matchScore: 0,
     alternatives: ["Lambda", "ECS on EC2", "App Runner"],
+    deploymentTime: "10-20 minutes",
+    resourceRequirements: "0.25-4 vCPU, 0.5GB-30GB RAM configurations",
+    realWorldExample: "Coca-Cola uses Fargate to run containerized microservices without managing infrastructure"
   },
   ec2: {
     service: "Amazon EC2",
@@ -562,6 +582,23 @@ const serviceRecommendations: Record<string, Recommendation> = {
     description: "Easy-to-use platform for deploying and managing web applications and services",
     useCases: ["Web applications", "API services", "Development environments", "Quick deployments"],
     pricing: "No additional charges, pay for underlying AWS resources",
+    pricingExamples: [
+      {
+        scenario: "Simple web app (t3.micro)",
+        monthlyEstimate: "$8.47",
+        details: "Same as EC2 pricing + Application Load Balancer if needed"
+      },
+      {
+        scenario: "Production app (t3.medium + ALB)",
+        monthlyEstimate: "$47.37",
+        details: "EC2 instance + load balancer + monitoring included"
+      },
+      {
+        scenario: "Auto-scaling app environment",
+        monthlyEstimate: "$60-200",
+        details: "Multiple instances with auto-scaling and health monitoring"
+      }
+    ],
     pros: ["Easy deployment", "Multiple platform support", "Monitoring included", "Version management"],
     cons: ["Less control than EC2", "Platform limitations", "Can be complex for advanced use cases"],
     bestFor: ["Web applications", "Rapid development", "Platform-based apps", "Teams wanting simplicity"],
@@ -569,6 +606,9 @@ const serviceRecommendations: Record<string, Recommendation> = {
     cost: "Medium",
     matchScore: 0,
     alternatives: ["App Runner", "ECS", "Lambda"],
+    deploymentTime: "10-15 minutes",
+    resourceRequirements: "Supports multiple instance types from t2.nano to c5.24xlarge",
+    realWorldExample: "Many startups use Beanstalk to quickly deploy and scale web applications without infrastructure management"
   },
   batch: {
     service: "AWS Batch",
@@ -576,6 +616,23 @@ const serviceRecommendations: Record<string, Recommendation> = {
     description: "Fully managed batch processing service for running jobs at any scale",
     useCases: ["Data processing", "ETL jobs", "Scientific computing", "Image/video processing", "ML training"],
     pricing: "Pay for underlying compute resources used",
+    pricingExamples: [
+      {
+        scenario: "Small batch jobs (m5.large spot)",
+        monthlyEstimate: "$15-25",
+        details: "Using spot instances can save up to 90% vs on-demand"
+      },
+      {
+        scenario: "Medium data processing (c5.xlarge)",
+        monthlyEstimate: "$125",
+        details: "On-demand pricing for consistent workloads"
+      },
+      {
+        scenario: "Large-scale ML training",
+        monthlyEstimate: "$500-2000",
+        details: "GPU instances (p3.2xlarge) for intensive compute workloads"
+      }
+    ],
     pros: ["Optimized for batch workloads", "Automatic resource provisioning", "Job queuing", "Spot instance support"],
     cons: ["Not for real-time processing", "Learning curve", "Overhead for simple tasks"],
     bestFor: ["Batch processing", "Data pipelines", "Scientific computing", "Large-scale processing"],
@@ -583,6 +640,9 @@ const serviceRecommendations: Record<string, Recommendation> = {
     cost: "Low",
     matchScore: 0,
     alternatives: ["Lambda", "ECS", "EC2"],
+    deploymentTime: "15-30 minutes",
+    resourceRequirements: "Supports all EC2 instance types, including GPU and high-memory instances",
+    realWorldExample: "Financial institutions use AWS Batch for risk modeling and fraud detection at massive scale"
   },
   lightsail: {
     service: "Amazon Lightsail",
@@ -590,6 +650,23 @@ const serviceRecommendations: Record<string, Recommendation> = {
     description: "Simple virtual private servers with predictable pricing for small-scale applications",
     useCases: ["Simple web applications", "Development environments", "Small databases", "WordPress sites", "Learning"],
     pricing: "Fixed monthly pricing starting at $3.50/month",
+    pricingExamples: [
+      {
+        scenario: "Nano instance (512MB RAM)",
+        monthlyEstimate: "$3.50",
+        details: "Perfect for learning and small websites"
+      },
+      {
+        scenario: "Small instance (1GB RAM)",
+        monthlyEstimate: "$5.00",
+        details: "Good for small WordPress sites or development"
+      },
+      {
+        scenario: "Medium instance (4GB RAM)",
+        monthlyEstimate: "$20.00",
+        details: "Suitable for small business applications"
+      }
+    ],
     pros: ["Simple setup", "Predictable pricing", "Includes networking and storage", "Great for beginners"],
     cons: ["Limited scalability", "Fewer advanced features", "Not suitable for enterprise"],
     bestFor: ["Simple projects", "Learning AWS", "Small websites", "Development environments"],
@@ -597,6 +674,9 @@ const serviceRecommendations: Record<string, Recommendation> = {
     cost: "Low",
     matchScore: 0,
     alternatives: ["EC2", "Beanstalk", "App Runner"],
+    deploymentTime: "5-10 minutes",
+    resourceRequirements: "Fixed bundles from 512MB to 32GB RAM, 1-8 vCPUs",
+    realWorldExample: "Small businesses and bloggers use Lightsail for simple WordPress hosting and development environments"
   },
   eks: {
     service: "Amazon EKS",
@@ -604,6 +684,23 @@ const serviceRecommendations: Record<string, Recommendation> = {
     description: "Managed Kubernetes service for running containerized applications",
     useCases: ["Container orchestration", "Microservices", "Multi-cloud deployments", "Enterprise applications"],
     pricing: "$0.10 per hour per cluster + worker node costs",
+    pricingExamples: [
+      {
+        scenario: "Small cluster (3 t3.medium nodes)",
+        monthlyEstimate: "$164",
+        details: "$73 control plane + $91 for worker nodes"
+      },
+      {
+        scenario: "Production cluster (managed node groups)",
+        monthlyEstimate: "$300-800",
+        details: "Includes control plane, worker nodes, and load balancing"
+      },
+      {
+        scenario: "Enterprise multi-AZ cluster",
+        monthlyEstimate: "$1000+",
+        details: "High availability with auto-scaling and monitoring"
+      }
+    ],
     pros: ["Industry-standard Kubernetes", "Portable workloads", "Rich ecosystem", "Advanced orchestration"],
     cons: ["Kubernetes complexity", "Higher learning curve", "Additional management overhead"],
     bestFor: ["Complex containerized apps", "Multi-cloud strategy", "Kubernetes expertise", "Enterprise workloads"],
@@ -611,6 +708,9 @@ const serviceRecommendations: Record<string, Recommendation> = {
     cost: "Medium",
     matchScore: 0,
     alternatives: ["ECS", "Fargate", "EC2"],
+    deploymentTime: "45-90 minutes",
+    resourceRequirements: "Minimum 2 vCPU, 4GB RAM per node - scales to hundreds of nodes",
+    realWorldExample: "Shopify migrated to EKS to manage thousands of containerized microservices across multiple regions"
   },
   sagemaker: {
     service: "Amazon SageMaker",
@@ -618,6 +718,23 @@ const serviceRecommendations: Record<string, Recommendation> = {
     description: "Fully managed machine learning platform for model building, training, and deployment",
     useCases: ["ML model training", "Model deployment", "Data science", "AI applications", "AutoML"],
     pricing: "Pay for compute instances, storage, and model endpoints used",
+    pricingExamples: [
+      {
+        scenario: "Notebook instance (ml.t3.medium)",
+        monthlyEstimate: "$43",
+        details: "For development and experimentation"
+      },
+      {
+        scenario: "Model training (ml.m5.xlarge)",
+        monthlyEstimate: "$138/month",
+        details: "Pay-per-use training with automatic model tuning"
+      },
+      {
+        scenario: "Real-time inference endpoint",
+        monthlyEstimate: "$200-1000",
+        details: "Depending on instance type and auto-scaling configuration"
+      }
+    ],
     pros: ["Built-in ML algorithms", "Jupyter notebooks", "Model management", "Auto-scaling inference"],
     cons: ["ML-specific", "Can be expensive", "Learning curve for non-ML teams"],
     bestFor: ["Machine learning", "Data science", "AI applications", "Model deployment"],
@@ -625,6 +742,9 @@ const serviceRecommendations: Record<string, Recommendation> = {
     cost: "High",
     matchScore: 0,
     alternatives: ["EC2 with ML AMIs", "Lambda for inference", "Batch for training"],
+    deploymentTime: "20-45 minutes",
+    resourceRequirements: "Various ML-optimized instances from 2 vCPU to 96 vCPU with GPU support",
+    realWorldExample: "Capital One uses SageMaker to build and deploy fraud detection models at scale"
   },
   outposts: {
     service: "AWS Outposts",
@@ -632,6 +752,23 @@ const serviceRecommendations: Record<string, Recommendation> = {
     description: "Fully managed service that extends AWS infrastructure to on-premises locations",
     useCases: ["Hybrid cloud", "Data residency requirements", "Low latency", "On-premises integration"],
     pricing: "Monthly pricing for Outposts rack, plus usage-based pricing",
+    pricingExamples: [
+      {
+        scenario: "Small Outpost rack (m5.large family)",
+        monthlyEstimate: "$5,500",
+        details: "42U rack with compute, storage, and networking"
+      },
+      {
+        scenario: "Large Outpost rack (m5.24xlarge family)",
+        monthlyEstimate: "$15,000",
+        details: "High-performance rack for demanding workloads"
+      },
+      {
+        scenario: "Enterprise multi-rack deployment",
+        monthlyEstimate: "$50,000+",
+        details: "Multiple racks with high availability and redundancy"
+      }
+    ],
     pros: ["True hybrid cloud", "AWS services on-premises", "Low latency", "Data residency compliance"],
     cons: ["High cost", "Physical installation required", "Limited service availability"],
     bestFor: ["Hybrid architectures", "Data residency", "Low latency requirements", "Enterprise"],
@@ -639,6 +776,9 @@ const serviceRecommendations: Record<string, Recommendation> = {
     cost: "High",
     matchScore: 0,
     alternatives: ["EC2", "Local Zones", "Wavelength"],
+    deploymentTime: "6-12 weeks",
+    resourceRequirements: "Physical rack installation, dedicated network connection, 3-year commitment",
+    realWorldExample: "Healthcare organizations use Outposts to keep sensitive patient data on-premises while leveraging AWS services"
   },
 }
 
